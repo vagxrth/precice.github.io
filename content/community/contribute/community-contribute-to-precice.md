@@ -40,6 +40,49 @@ and merge them as soon as possible.
 These pages are written in [Markdown](https://guides.github.com/features/mastering-markdown/) (a very easy language)
 and we also have a [cheatsheet](docs-meta-cheatsheet.html) specifically for this website.
 
+## Repository structure
+
+If you are new to this repository, this is the most important structure to know:
+
+```bash
+.
+├── _config.yml
+├── _layouts/
+├── _includes/
+├── _data/
+├── _plugins/
+├── content/
+├── collections/
+├── imported/
+├── images/
+├── css/
+├── js/
+├── .github/workflows/
+└── tools/
+```
+
+- `_config.yml`: site-wide settings, defaults, and subproject import configuration.
+- `_layouts/`: page-level templates (for example the default page shell).
+- `_includes/`: reusable HTML snippets used by layouts and pages.
+- `_data/`: YAML data files used for navigation and structured page data (for example sidebars and top navigation).
+- `_plugins/`: custom Jekyll plugins used during the site build.
+- `content/`: main website pages (docs, tutorials, community, about, and others).
+- `collections/`: structured content collections (for example testimonials and publications).
+- `imported/`: Git submodules for content maintained in other repositories. In most cases, edit the source repository first and then update the submodule pointer here.
+- `images/`, `css/`, `js/`: static assets used by the website.
+- `.github/workflows/`: CI workflows for checks, build, deployment, and scheduled updates.
+- `tools/`: utility scripts used by checks and data update workflows.
+
+### Where to contribute what
+
+- Fix or improve page text: edit files in `content/` (or in the source repository if the page is imported through `imported/`).
+- Change sidebars or top navigation: edit `_data/sidebars/*.yml` and `_data/topnav.yml`.
+- Change shared page structure/components: edit `_layouts/` and `_includes/`.
+- Change build/import behavior: edit `_plugins/` and `_config.yml`.
+- Change automation/check behavior: edit `.github/workflows/` and `tools/`.
+
+Build flow in one paragraph: Jekyll reads Markdown and frontmatter from `content/` and `collections/`, applies defaults from `_config.yml`, loads imported subproject content configured in `_config.yml` (from `imported/`), renders pages through `_layouts/` and `_includes/`, uses `_data/` for structured navigation/content data, executes `_plugins/` during generation, and writes the final static site to `_site/`.
+
 ## Reporting issues
 
 After discussing a problem in one of our [community channels](community-channels.html), we may conclude that this is a bug
